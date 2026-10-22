@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Happy Birthday, Samreen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body class="is-locked">
+  <div class="atmosphere" aria-hidden="true">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="night-sky">
+      <span class="sky-star sky-star-a"></span>
+      <span class="sky-star sky-star-b"></span>
+    </div>
+    <canvas id="roses"></canvas>
+  </div>
+
+  <section class="gate" id="gate" aria-label="Secret code">
+    <form class="gate-form" id="gateForm" autocomplete="off">
+      <p class="gate-eyebrow">For your eyes only</p>
+      <h1 class="gate-title">Enter the secret code</h1>
+      <p class="gate-lede">A little key to open what’s waiting for you.</p>
+      <label class="gate-label" for="secretCode">Secret code</label>
+      <input
+        class="gate-input"
+        id="secretCode"
+        name="secretCode"
+        type="password"
+        inputmode="text"
+        maxlength="32"
+        placeholder="Type the code…"
+        required
+        autofocus
+      />
+      <p class="gate-error" id="gateError" role="alert" hidden>
+        That’s not the one… try again, my love.
+      </p>
+      <button class="gate-submit" type="submit">Unlock my heart</button>
+    </form>
+  </section>
+
+  <div class="wish-overlay" id="wishOverlay" hidden>
+    <p class="wish-kicker">With all my love</p>
+    <p class="wish-title">Happy Birthday</p>
+    <p class="wish-name">Samreen</p>
+  </div>
+
+  <main id="app" hidden>
+    <section class="hero">
+      <p class="eyebrow reveal">October 23</p>
+      <h1 class="title reveal">
+        <span class="title-line">Happy</span>
+        <span class="title-line accent">Birthday</span>
+        <span class="title-line soft">Samreen</span>
+      </h1>
+      <p class="lede reveal">
+        Today the world gets a little softer — because it’s your day, my love.
+      </p>
+      <button type="button" class="cta reveal" id="openHeart">
+        Open my heart
+      </button>
+    </section>
+
+    <section class="quotes" id="quotes" hidden>
+      <p class="section-label">Words for Samreen</p>
+      <blockquote class="quote" id="quoteText">
+        <p></p>
+        <cite></cite>
+      </blockquote>
+      <div class="quote-nav">
+        <button type="button" class="nav-btn" id="prevQuote" aria-label="Previous quote">‹</button>
+        <div class="dots" id="dots" aria-hidden="true"></div>
+        <button type="button" class="nav-btn" id="nextQuote" aria-label="Next quote">›</button>
+      </div>
+    </section>
+
+    <section class="letter" id="letter" hidden>
+      <p class="section-label">A note from me</p>
+      <div class="letter-body">
+        <p>
+          Samreen — another year of you. Of your laugh, your kindness, and the
+          way you make ordinary days feel like something worth keeping.
+        </p>
+        <p>
+          I hope this year brings you everything your heart has been quietly
+          hoping for. You deserve soft mornings, big dreams, and someone who
+          chooses you every single day.
+        </p>
+        <p class="sign-off">Happy birthday, Samreen.<br />Forever yours.</p>
+      </div>
+    </section>
+
+    <section class="kids" id="kids" hidden aria-label="Abban and Airah">
+      <p class="section-label">Our little stars</p>
+      <div class="kids-stage">
+        <div class="kid kid-boy" aria-hidden="true">
+          <div class="kid-figure">
+            <span class="kid-arm kid-arm-l"></span>
+            <span class="kid-body boy-body"></span>
+            <span class="kid-arm kid-arm-r"></span>
+            <span class="kid-head">
+              <span class="kid-hair boy-hair"></span>
+              <span class="kid-face">
+                <span class="kid-eye"></span>
+                <span class="kid-eye"></span>
+                <span class="kid-smile"></span>
+              </span>
+            </span>
+            <span class="kid-legs">
+              <span class="kid-leg"></span>
+              <span class="kid-leg"></span>
+            </span>
+          </div>
+          <p class="kid-name">Abban</p>
+        </div>
+
+        <div class="kids-heart" aria-hidden="true"></div>
+
+        <div class="kid kid-girl" aria-hidden="true">
+          <div class="kid-figure">
+            <span class="kid-arm kid-arm-l"></span>
+            <span class="kid-body girl-body"></span>
+            <span class="kid-arm kid-arm-r"></span>
+            <span class="kid-head">
+              <span class="kid-hair girl-hair"></span>
+              <span class="kid-bow"></span>
+              <span class="kid-face">
+                <span class="kid-eye"></span>
+                <span class="kid-eye"></span>
+                <span class="kid-smile"></span>
+              </span>
+            </span>
+            <span class="kid-legs">
+              <span class="kid-leg"></span>
+              <span class="kid-leg"></span>
+            </span>
+          </div>
+          <p class="kid-name">Airah</p>
+        </div>
+      </div>
+      <p class="kids-caption">Abban &amp; Airah — sending birthday hugs</p>
+    </section>
+  </main>
+
+  <script type="module" src="roses.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
