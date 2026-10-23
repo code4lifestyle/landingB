@@ -6,7 +6,7 @@
   <title>Happy Birthday, Samreen</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;1,400&family=Pacifico&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script type="importmap">
     {
@@ -108,6 +108,73 @@
       <button type="button" class="cta reveal" id="openHeart">
         Open my heart for you
       </button>
+    </section>
+
+    <section class="heart-bridge" id="heartBridge" hidden aria-label="Love heart">
+      <div class="love-heart-scene">
+        <div class="love-heart-3d">
+          <span class="heart-glow"></span>
+          <svg class="heart-svg" viewBox="0 0 200 190" aria-hidden="true">
+            <defs>
+              <linearGradient id="roseHeartGrad" x1="20%" y1="10%" x2="85%" y2="95%">
+                <stop offset="0%" stop-color="#d94a66" />
+                <stop offset="35%" stop-color="#b01030" />
+                <stop offset="70%" stop-color="#8b0c28" />
+                <stop offset="100%" stop-color="#5c0818" />
+              </linearGradient>
+              <radialGradient id="roseHeartSheen" cx="32%" cy="28%" r="55%">
+                <stop offset="0%" stop-color="#ff6b8a" stop-opacity="0.55" />
+                <stop offset="45%" stop-color="#b01030" stop-opacity="0.15" />
+                <stop offset="100%" stop-color="#4a0614" stop-opacity="0" />
+              </radialGradient>
+              <filter id="roseHeartSoft" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="2.2" result="blur" />
+                <feOffset dy="3" result="offset" />
+                <feFlood flood-color="#3a0410" flood-opacity="0.45" />
+                <feComposite in2="offset" operator="in" />
+                <feMerge>
+                  <feMergeNode />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <path
+              class="heart-path"
+              filter="url(#roseHeartSoft)"
+              fill="url(#roseHeartGrad)"
+              d="M100 172
+                 C48 130 12 98 12 58
+                 C12 28 34 10 58 10
+                 C76 10 90 20 100 36
+                 C110 20 124 10 142 10
+                 C166 10 188 28 188 58
+                 C188 98 152 130 100 172Z"
+            />
+            <path
+              fill="url(#roseHeartSheen)"
+              d="M100 172
+                 C48 130 12 98 12 58
+                 C12 28 34 10 58 10
+                 C76 10 90 20 100 36
+                 C110 20 124 10 142 10
+                 C166 10 188 28 188 58
+                 C188 98 152 130 100 172Z"
+            />
+            <ellipse class="heart-petal-light" cx="68" cy="48" rx="22" ry="14" transform="rotate(-28 68 48)" />
+            <text
+              class="heart-word"
+              x="100"
+              y="108"
+              text-anchor="middle"
+              dominant-baseline="middle"
+            >samworld</text>
+          </svg>
+        </div>
+        <span class="heart-spark heart-spark-a"></span>
+        <span class="heart-spark heart-spark-b"></span>
+        <span class="heart-spark heart-spark-c"></span>
+        <span class="heart-spark heart-spark-d"></span>
+      </div>
     </section>
 
     <section class="quotes" id="quotes" hidden>

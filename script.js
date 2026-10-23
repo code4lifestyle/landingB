@@ -48,6 +48,7 @@ const openHeart = document.getElementById("openHeart");
 const quotesSection = document.getElementById("quotes");
 const letterSection = document.getElementById("letter");
 const kidsSection = document.getElementById("kids");
+const heartBridge = document.getElementById("heartBridge");
 const quoteEl = document.getElementById("quoteText");
 const quoteP = quoteEl.querySelector("p");
 const quoteCite = quoteEl.querySelector("cite");
@@ -164,11 +165,13 @@ function revealContent() {
 
   showWish();
 
+  heartBridge.hidden = false;
   quotesSection.hidden = false;
   letterSection.hidden = false;
   kidsSection.hidden = false;
 
   requestAnimationFrame(() => {
+    heartBridge.classList.add("is-visible");
     quotesSection.classList.add("is-visible");
     letterSection.classList.add("is-visible");
     kidsSection.classList.add("is-visible");

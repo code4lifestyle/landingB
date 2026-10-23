@@ -1018,6 +1018,190 @@ main {
   }
 }
 
+/* 3D love heart — fills the space between hero CTA and love notes */
+.heart-bridge {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(11rem, 28vh, 16rem);
+  margin: clamp(-4rem, -8vh, -2rem) auto clamp(1rem, 3vh, 2rem);
+  opacity: 0;
+  transform: translateY(28px) scale(0.85);
+  transition: opacity 1s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.heart-bridge.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.love-heart-scene {
+  position: relative;
+  width: clamp(7.5rem, 28vw, 11rem);
+  height: clamp(7.5rem, 28vw, 11rem);
+  perspective: 600px;
+}
+
+.love-heart-3d {
+  position: absolute;
+  inset: 4%;
+  transform-style: preserve-3d;
+  animation: heart-spin-float 5.5s ease-in-out infinite;
+  filter: drop-shadow(0 14px 24px rgba(80, 8, 20, 0.5));
+}
+
+.heart-svg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.heart-path {
+  transform-origin: 100px 95px;
+}
+
+.heart-petal-light {
+  fill: rgba(255, 150, 170, 0.28);
+  animation: heart-shine 2.8s ease-in-out infinite;
+}
+
+.heart-word {
+  font-family: "Pacifico", cursive;
+  font-size: 26px;
+  fill: #e8c9a8;
+  letter-spacing: 0.02em;
+  filter: drop-shadow(0 2px 4px rgba(40, 0, 10, 0.55));
+  animation: heart-word-pulse 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.heart-glow {
+  position: absolute;
+  inset: -6%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(176, 16, 48, 0.48) 0%,
+    rgba(176, 16, 48, 0.12) 42%,
+    transparent 70%
+  );
+  filter: blur(12px);
+  animation: heart-pulse-glow 2.4s ease-in-out infinite;
+  z-index: 0;
+}
+
+.heart-spark {
+  position: absolute;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: #e8a0b4;
+  box-shadow: 0 0 8px rgba(176, 16, 48, 0.75);
+  animation: heart-sparkle 2.6s ease-in-out infinite;
+}
+
+.heart-spark-a {
+  top: 8%;
+  left: 18%;
+  animation-delay: 0s;
+}
+
+.heart-spark-b {
+  top: 20%;
+  right: 10%;
+  width: 0.25rem;
+  height: 0.25rem;
+  animation-delay: 0.7s;
+}
+
+.heart-spark-c {
+  bottom: 18%;
+  left: 8%;
+  width: 0.28rem;
+  height: 0.28rem;
+  animation-delay: 1.3s;
+}
+
+.heart-spark-d {
+  bottom: 12%;
+  right: 16%;
+  animation-delay: 1.9s;
+}
+
+@keyframes heart-spin-float {
+  0%,
+  100% {
+    transform: rotateY(-18deg) rotateX(8deg) translateY(0) scale(1);
+  }
+  25% {
+    transform: rotateY(12deg) rotateX(4deg) translateY(-0.55rem) scale(1.04);
+  }
+  50% {
+    transform: rotateY(22deg) rotateX(-6deg) translateY(-0.2rem) scale(1.02);
+  }
+  75% {
+    transform: rotateY(-8deg) rotateX(6deg) translateY(-0.7rem) scale(1.06);
+  }
+}
+
+@keyframes heart-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes heart-shine {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes heart-sparkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  70% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes heart-word-pulse {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scale(1);
+    fill: #e8c9a8;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+    fill: #f5dfc4;
+  }
+}
+
 .quotes,
 .letter {
   margin-top: clamp(2.5rem, 8vh, 4.5rem);
@@ -1918,7 +2102,12 @@ main {
   .kid-eye,
   .kids-heart,
   .wish-heart,
-  .kids-caption {
+  .kids-caption,
+  .love-heart-3d,
+  .heart-glow,
+  .heart-petal-light,
+  .heart-spark,
+  .heart-word {
     animation: none;
   }
 
