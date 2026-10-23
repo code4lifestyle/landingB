@@ -93,7 +93,6 @@ function handleGateSubmit(event) {
   if (entered === expected) {
     gateError.hidden = true;
     secretInput.classList.remove("is-wrong");
-    sessionStorage.setItem("birthdayUnlocked", "1");
     unlockApp();
     return;
   }
@@ -208,9 +207,6 @@ nextBtn.addEventListener("click", () => {
   startAutoRotate();
 });
 
-// Stay unlocked for this browser tab session after a correct code
-if (sessionStorage.getItem("birthdayUnlocked") === "1") {
-  unlockApp();
-} else {
-  window.setTimeout(() => secretInput.focus(), 100);
-}
+// Always ask for the secret code on open so the birthday wish can play again
+sessionStorage.removeItem("birthdayUnlocked");
+window.setTimeout(() => secretInput.focus(), 100);

@@ -16,142 +16,26 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setClearColor(0x000000, 0);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
+renderer.toneMappingExposure = 1.12;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-scene.add(new THREE.AmbientLight(0xffc4d4, 0.28));
+scene.add(new THREE.AmbientLight(0xffc4d4, 0.34));
 
-const key = new THREE.DirectionalLight(0xfff2e8, 1.15);
+const key = new THREE.DirectionalLight(0xfff2e8, 1.2);
 key.position.set(2.8, 4.5, 3.5);
 scene.add(key);
 
-const fill = new THREE.DirectionalLight(0xff6b8a, 0.35);
+const fill = new THREE.DirectionalLight(0xff6b8a, 0.45);
 fill.position.set(-3.5, 1.2, -1.5);
 scene.add(fill);
 
-const roseLight = new THREE.PointLight(0xff3355, 2.4, 12);
+const roseLight = new THREE.PointLight(0xff4d6d, 2.8, 14);
 roseLight.position.set(0.4, 0.2, 2.2);
 scene.add(roseLight);
 
-const moonGroup = new THREE.Group();
-moonGroup.position.set(0, 2.85, -1.2);
-scene.add(moonGroup);
-
-const textureLoader = new THREE.TextureLoader();
-
-// Real photograph of the Moon as seen from Earth
-const moonEarthMap = textureLoader.load("./assets/moon-earth.jpg");
-moonEarthMap.colorSpace = THREE.SRGBColorSpace;
-moonEarthMap.anisotropy = 8;
-
-// Flat disk facing us — real Moon photo as seen from Earth
-const moonMaterial = new THREE.ShaderMaterial({
-  transparent: true,
-  depthWrite: false,
-  toneMapped: false,
-  uniforms: {
-    moonMap: { value: moonEarthMap },
-    time: { value: 0 },
-  },
-  vertexShader: `
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  fragmentShader: `
-    uniform sampler2D moonMap;
-    uniform float time;
-    varying vec2 vUv;
-
-    void main() {
-      vec2 uv = vUv;
-      vec3 albedo = texture2D(moonMap, uv).rgb;
-      float luma = dot(albedo, vec3(0.299, 0.587, 0.114));
-
-      // Cut out black space around the photographed disk
-      if (luma < 0.04) discard;
-
-      vec2 p = uv * 2.0 - 1.0;
-      float r = length(p);
-      if (r > 0.995) discard;
-
-      // Reconstruct a sphere normal so lighting looks 3D on the photo
-      float z = sqrt(max(0.0, 1.0 - r * r));
-      vec3 n = normalize(vec3(p.x, p.y, z));
-
-      // Sunlight from the left = first-quarter moon from Earth
-      vec3 L = normalize(vec3(-1.0, 0.02, 0.08));
-      float ndotl = dot(n, L);
-
-      // Soft terminator like the real lunar night line
-      float day = smoothstep(-0.025, 0.04, ndotl);
-      float shade = clamp(ndotl, 0.0, 1.0);
-
-      // Preserve real crater / maria detail from the photo
-      vec3 surface = albedo * vec3(1.06, 1.03, 0.98);
-      surface = mix(surface, vec3(luma), 0.08);
-
-      // Bright sunlit face
-      vec3 lit = surface * (0.7 + 0.55 * shade);
-      lit += surface * pow(shade, 3.0) * 0.25;
-
-      // Dark face with soft earthshine (as seen on real half moons)
-      vec3 night = surface * vec3(0.05, 0.065, 0.1) + vec3(0.012, 0.016, 0.028);
-
-      vec3 color = mix(night, lit, day);
-
-      // Bright limb on the sunlit edge
-      float edge = smoothstep(0.72, 0.99, r);
-      color += vec3(0.65, 0.64, 0.58) * edge * day * 0.18;
-
-      float alpha = smoothstep(0.04, 0.12, luma) * smoothstep(1.0, 0.9, r);
-      color *= 0.98 + 0.02 * sin(time * 0.6);
-
-      gl_FragColor = vec4(color, alpha);
-    }
-  `,
-});
-
-const moon = new THREE.Mesh(new THREE.PlaneGeometry(1.7, 1.7), moonMaterial);
-moon.renderOrder = 2;
-moonGroup.add(moon);
-
-// Soft silvery halo on the lit side
-const moonHalo = new THREE.Mesh(
-  new THREE.PlaneGeometry(2.4, 2.4),
-  new THREE.ShaderMaterial({
-    transparent: true,
-    depthWrite: false,
-    toneMapped: false,
-    uniforms: { time: { value: 0 } },
-    vertexShader: `
-      varying vec2 vUv;
-      void main() {
-        vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `,
-    fragmentShader: `
-      uniform float time;
-      varying vec2 vUv;
-      void main() {
-        vec2 p = vUv * 2.0 - 1.0;
-        float r = length(p);
-        float litSide = smoothstep(0.45, -0.15, p.x);
-        float glow = exp(-pow((r - 0.38) * 2.8, 2.0)) * 0.35;
-        float wash = exp(-r * r * 2.4) * 0.16;
-        float alpha = (glow + wash) * litSide;
-        alpha *= 0.9 + 0.1 * sin(time * 0.8);
-        gl_FragColor = vec4(0.9, 0.9, 0.82, alpha);
-      }
-    `,
-  })
-);
-moonHalo.position.z = -0.03;
-moonHalo.renderOrder = 1;
-moonGroup.add(moonHalo);
+const romanceLight = new THREE.PointLight(0xd4a574, 0.9, 16);
+romanceLight.position.set(-1.2, 1.5, 1.5);
+scene.add(romanceLight);
 
 const rosePivot = new THREE.Group();
 rosePivot.position.set(0, -1.85, 0.35);
@@ -399,9 +283,7 @@ function easeOutCubic(t) {
   return 1 - (1 - t) ** 3;
 }
 
-let moonBaseY = 2.85;
 let roseBaseY = -1.85;
-let moonScale = 1;
 let roseScaleFactor = 1;
 
 function layoutForViewport(w, h) {
@@ -412,47 +294,32 @@ function layoutForViewport(w, h) {
   const isTablet = w >= 600 && w <= 1024;
   const isLandscapePhone = aspect > 1.2 && h < 520;
 
-  // Moon sits in the top band without covering the title
   if (isLandscapePhone) {
-    moonBaseY = 1.45;
-    moonScale = 0.5;
     roseBaseY = -1.05;
     roseScaleFactor = 0.5;
     camera.position.z = 7.8;
   } else if (isTiny) {
-    moonBaseY = 2.35;
-    moonScale = 0.68;
     roseBaseY = -2.05;
     roseScaleFactor = 0.68;
     camera.position.z = 7.5;
   } else if (isShort) {
-    moonBaseY = 2.0;
-    moonScale = 0.66;
     roseBaseY = -1.4;
     roseScaleFactor = 0.66;
     camera.position.z = 7.5;
   } else if (isNarrow) {
-    moonBaseY = 2.5;
-    moonScale = 0.76;
     roseBaseY = -1.95;
     roseScaleFactor = 0.76;
     camera.position.z = 7.25;
   } else if (isTablet) {
-    moonBaseY = 2.65;
-    moonScale = 0.9;
     roseBaseY = -1.8;
     roseScaleFactor = 0.9;
     camera.position.z = 7.0;
   } else {
-    moonBaseY = Math.max(2.35, Math.min(3.2, 1.55 + h / w));
-    moonScale = aspect < 0.7 ? 0.85 : 1;
     roseBaseY = -1.85;
     roseScaleFactor = aspect < 0.7 ? 0.88 : 1;
     camera.position.z = 6.8;
   }
 
-  moonGroup.scale.setScalar(moonScale);
-  moonGroup.position.y = moonBaseY;
   rosePivot.position.y = roseBaseY;
 }
 
@@ -469,18 +336,6 @@ function resize() {
 
 function animate(time) {
   const t = time * 0.001;
-
-  moonMaterial.uniforms.time.value = reduceMotion ? 0 : t;
-  moonHalo.material.uniforms.time.value = reduceMotion ? 0 : t;
-
-  // Keep the Earth-view moon facing the camera
-  moonGroup.quaternion.copy(camera.quaternion);
-
-  if (!reduceMotion) {
-    // Gentle drift — phase stays a true half moon
-    moonGroup.position.x = Math.sin(t * 0.18) * 0.1;
-    moonGroup.position.y = moonBaseY + Math.sin(t * 0.55) * 0.04;
-  }
 
   if (roseModel) {
     if (bloom < 1) {
