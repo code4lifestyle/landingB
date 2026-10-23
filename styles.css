@@ -11,6 +11,7 @@
   --ink: #2a1820;
   --muted: rgba(250, 243, 240, 0.78);
   --font-display: "Great Vibes", "Segoe Script", cursive;
+  --font-letter: "Allura", "Segoe Script", cursive;
   --font-body: "Lora", Georgia, serif;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -1165,6 +1166,27 @@ main {
   line-height: 1.75;
 }
 
+.letter-body .letter-quote {
+  font-family: var(--font-letter);
+  font-size: clamp(1.55rem, 5.5vw, 2.35rem);
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.45;
+  text-align: center;
+  text-shadow: 0 6px 22px rgba(0, 0, 0, 0.28);
+  margin-bottom: 0.65rem;
+}
+
+.letter-body .letter-quote-author {
+  font-family: var(--font-body);
+  font-size: clamp(0.72rem, 2vw, 0.82rem);
+  font-style: italic;
+  letter-spacing: 0.06em;
+  color: var(--rose-soft);
+  text-align: center;
+  margin-bottom: 0;
+}
+
 .letter-body .sign-off {
   font-family: var(--font-display);
   font-size: clamp(1.55rem, 5vw, 2rem);
@@ -1172,6 +1194,7 @@ main {
   margin-top: 1.5rem;
   margin-bottom: 0;
   line-height: 1.4;
+  text-align: center;
   text-shadow: 0 4px 18px rgba(196, 92, 122, 0.3);
 }
 
@@ -1439,13 +1462,144 @@ main {
   left: 0.35rem;
 }
 
+.kids-wish {
+  position: relative;
+  margin-top: 0.75rem;
+  padding: 1.1rem 0.5rem 0.4rem;
+  overflow: visible;
+}
+
 .kids-caption {
-  font-family: var(--font-body);
-  font-size: clamp(0.8rem, 2.4vw, 0.92rem);
-  color: var(--gold-soft);
-  font-style: italic;
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-letter);
+  font-size: clamp(1.45rem, 5.5vw, 2.15rem);
+  font-style: normal;
+  font-weight: 400;
+  color: var(--blush);
   letter-spacing: 0.02em;
-  margin-top: 0.35rem;
+  line-height: 1.3;
+  text-shadow: 0 4px 18px rgba(196, 92, 122, 0.35);
+  animation: wish-glow 3.2s ease-in-out infinite;
+}
+
+.wish-heart {
+  position: absolute;
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--rose);
+  transform: rotate(-45deg);
+  z-index: 0;
+  animation: wish-float 3.4s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(196, 92, 122, 0.55));
+  pointer-events: none;
+}
+
+.wish-heart::before,
+.wish-heart::after {
+  content: "";
+  position: absolute;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--rose);
+}
+
+.wish-heart::before {
+  top: -0.28rem;
+  left: 0;
+}
+
+.wish-heart::after {
+  top: 0;
+  left: 0.28rem;
+}
+
+.wish-heart-a {
+  left: 12%;
+  bottom: 0.2rem;
+  animation-delay: 0s;
+}
+
+.wish-heart-b {
+  left: 28%;
+  bottom: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  animation-duration: 2.8s;
+  animation-delay: 0.6s;
+}
+
+.wish-heart-b::before,
+.wish-heart-b::after {
+  width: 0.4rem;
+  height: 0.4rem;
+}
+
+.wish-heart-b::before {
+  top: -0.2rem;
+}
+
+.wish-heart-b::after {
+  left: 0.2rem;
+}
+
+.wish-heart-c {
+  right: 26%;
+  left: auto;
+  bottom: 0.1rem;
+  width: 0.48rem;
+  height: 0.48rem;
+  animation-duration: 3.6s;
+  animation-delay: 1.1s;
+}
+
+.wish-heart-c::before,
+.wish-heart-c::after {
+  width: 0.48rem;
+  height: 0.48rem;
+}
+
+.wish-heart-c::before {
+  top: -0.24rem;
+}
+
+.wish-heart-c::after {
+  left: 0.24rem;
+}
+
+.wish-heart-d {
+  right: 10%;
+  left: auto;
+  bottom: 0;
+  animation-duration: 3s;
+  animation-delay: 1.7s;
+}
+
+@keyframes wish-float {
+  0% {
+    opacity: 0;
+    transform: rotate(-45deg) translateY(0.4rem) scale(0.7);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(-45deg) translateY(-2.4rem) scale(1.15);
+  }
+}
+
+@keyframes wish-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.03);
+    filter: brightness(1.12);
+  }
 }
 
 @keyframes kid-bounce {
@@ -1762,7 +1916,9 @@ main {
   .kid-arm,
   .kid-leg,
   .kid-eye,
-  .kids-heart {
+  .kids-heart,
+  .wish-heart,
+  .kids-caption {
     animation: none;
   }
 

@@ -5,11 +5,11 @@ const SECRET_CODE = "helmanbaba";
 
 const QUOTES = [
   {
-    text: "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine.",
-    author: "Maya Angelou",
+    text: "I carry your heart with me. I carry it in my heart. I am never without it.",
+    author: "E. E. Cummings",
   },
   {
-    text: "I love you not only for what you are, but for what I am when I am with you.",
+    text: "How do I love thee? Let me count the ways. I love thee to the depth and breadth and height my soul can reach.",
     author: "Elizabeth Barrett Browning",
   },
   {
@@ -17,8 +17,8 @@ const QUOTES = [
     author: "Leo Christopher",
   },
   {
-    text: "I saw that you were perfect, and so I loved you. Then I saw that you were not perfect and I loved you even more.",
-    author: "Angelita Lim",
+    text: "I love you not only for what you are, but for what I am when I am with you.",
+    author: "Elizabeth Barrett Browning",
   },
   {
     text: "Whatever our souls are made of, his and mine are the same.",
@@ -29,12 +29,12 @@ const QUOTES = [
     author: "J.R.R. Tolkien",
   },
   {
-    text: "You don't love someone because they're perfect. You love them in spite of the fact that they're not.",
-    author: "Jodi Picoult",
+    text: "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine.",
+    author: "Maya Angelou",
   },
   {
-    text: "Every love story is beautiful, but ours is my favorite.",
-    author: "Unknown",
+    text: "Grow old along with me! The best is yet to be.",
+    author: "Robert Browning",
   },
 ];
 
